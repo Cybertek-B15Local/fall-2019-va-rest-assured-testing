@@ -6,7 +6,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.when;
-
+import static org.hamcrest.MatcherAssert.*;
+import static org.hamcrest.Matchers.*;
 public class ResponseObjectTests {
 
 
@@ -28,6 +29,8 @@ public class ResponseObjectTests {
         // verify status
         response.then().statusCode(200);
         // verify response contains Vera
+        String resString = response.asString();
+        assertThat(resString, containsString("Vera"));
 
     }
 }
