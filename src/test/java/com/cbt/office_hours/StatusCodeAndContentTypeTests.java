@@ -28,7 +28,7 @@ public class StatusCodeAndContentTypeTests {
      * TC 02
      * make a get request to https://google.com
      * verify status code 200
-     * verify content type application/html
+     * verify content type text/html
      */
     @Test
     public void googleTest(){
