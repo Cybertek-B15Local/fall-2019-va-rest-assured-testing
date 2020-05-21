@@ -4,6 +4,9 @@ import io.restassured.RestAssured;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static io.restassured.RestAssured.given;
 
 public class GitHubTests {
@@ -27,6 +30,22 @@ public class GitHubTests {
     public void testselimpcf(){
         given().
                 pathParam("username", "selimpcf").
+        when().
+                get("/users/{username}").
+                prettyPeek().
+        then().statusCode(200);
+    }
+
+    /*
+    same test but for scarlet
+     */
+    @Test
+    public void testScarlet(){
+        Map<String, String> params = new HashMap<>();
+        params.put("username", "scarlet");
+
+        given().
+                pathParams(params).
         when().
                 get("/users/{username}").
                 prettyPeek().
