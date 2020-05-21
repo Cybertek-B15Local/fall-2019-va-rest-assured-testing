@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
+import static io.restassured.RestAssured.when;
 
 public class CustomHeadersTests {
 /*
@@ -43,10 +44,32 @@ then response will be in json and it will have header content-type with value js
      * include header Accept, value = json
      * verify that response content type is json
      */
+    @Test
+    public void testJson(){
+        given().
+                log().all().
+                header("Accept", "application/json").
+        when().
+                get("/spartans").
+        then().
+                log().all().
+                contentType(ContentType.JSON);
+    }
 
     /**
      * send a get request to http://54.224.118.38:8000/api
      * do not include any headers
      * verify that response content type is json
      */
+    @Test
+    public void defaultType(){
+        given().
+                log().all().
+        when().
+                get("/spartans").
+        then().
+                log().all().
+                contentType(ContentType.JSON);
+    }
+
 }
