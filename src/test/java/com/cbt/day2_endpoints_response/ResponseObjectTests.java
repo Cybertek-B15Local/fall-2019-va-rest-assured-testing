@@ -46,7 +46,4 @@ public class ResponseObjectTests {
             assertThat(response.asString(), containsString("Darleen"));
         }
 
-
-
-  
 }
