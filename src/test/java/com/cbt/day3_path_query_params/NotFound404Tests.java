@@ -41,7 +41,6 @@ public class NotFound404Tests {
                 get("/student/{id}").
         then().
                 statusCode(404);
-
     }
 
 }
