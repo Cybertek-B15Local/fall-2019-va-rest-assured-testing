@@ -41,8 +41,10 @@ public class GitHubTests {
      */
     @Test
     public void testScarlet(){
+
         Map<String, String> params = new HashMap<>();
         params.put("username", "scarlet");
+
 
         given().
                 pathParams(params).
@@ -50,6 +52,38 @@ public class GitHubTests {
                 get("/users/{username}").
                 prettyPeek().
         then().statusCode(200);
+    }
+
+    /*
+    how to provide multiple path params
+    1. param
+    2. params
+     */
+    @Test
+    public void paramsExamples(){
+       // 1. param
+       given().
+               log().all().
+               pathParam("endpoint", "users").
+               pathParam("username", "marufjont").
+       when().
+               get("{endpoint}/{username}").
+                prettyPeek().
+       then().statusCode(200);
+
+       // 2 params
+        Map<String, String> params = new HashMap<>();
+        params.put("username", "marufjont");
+        params.put("endpoint", "users");
+
+        given().
+                log().all().
+                pathParams(params).
+        when().
+                get("{endpoint}/{username}").
+                prettyPeek().
+        then().statusCode(200);
+
     }
 
 }
