@@ -96,8 +96,24 @@ public class JsonPathExample {
         String s2FirstName = jsonPath.getString("students[1].firstName");
         System.out.println("s2FirstName = " + s2FirstName);
 
+        // last students name
         String lastStudent = jsonPath.getString("students[-1].firstName");
         System.out.println("lastStudent = " + lastStudent);
+
+        // get all first name
+        List<String> list = jsonPath.getList("students.firstName");
+        System.out.println("list.size() = " + list.size());
+        System.out.println("list = " + list);
+
+        // get first students id
+        int s1Id = jsonPath.getInt("students[0].studentId");
+        System.out.println("s1Id = " + s1Id);
+
+        // get first student on object
+        Map<String, Object> s1 = jsonPath.getMap("students[0]");
+        System.out.println("s1 = " + s1);
+
+
     }
 
 }
