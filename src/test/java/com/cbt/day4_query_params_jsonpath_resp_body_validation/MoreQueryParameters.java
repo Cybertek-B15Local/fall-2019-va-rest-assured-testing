@@ -56,7 +56,7 @@ public class MoreQueryParameters {
     public void baseAndSymbolsTestWithMap(){
         Map<String, String> parametersMap=new HashMap<>();
         parametersMap.put("base", "PHP");
-        parametersMap.put("symbols", "USD");
+        parametersMap.put("symbols", "USD,GBP");
 
         given().
                 log().all().
@@ -67,5 +67,21 @@ public class MoreQueryParameters {
         then().statusCode(200);
 
     }
+    // FROM NIJAT:    https://api.exchangeratesapi.io/latest?symbols=USD,GBP
+    ///         key:  symbols
+    //          value: USD,GBP
+    //                https://api.exchangeratesapi.io/latest?symbols=USED&base=PHP
+    //          first param: key symbols, value: USD
+    //          second param: key base, value: PHP
 
+    // https://api.exchangeratesapi.io/latest?symbols=USD%2CGBP&base=PHP
+        // first  symbols=USD%2CGBP
+    // second  base=PHP
+
+//   https://www.google.com/search?
+//   q=selenium&
+//   oq=selenium&
+//   aqs=chrome..69i57j69i60l2j69i65l3j69i60l2.2095j0j4&
+//   sourceid=chrome&
+//   ie=UTF-8
 }
