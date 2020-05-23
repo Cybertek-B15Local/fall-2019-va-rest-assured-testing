@@ -20,7 +20,7 @@ public class FormParamsExample {
                 formParam("email", "librarian16@library").
                 formParam("password", "8BzUhhaU").
         when().
-                get("/login").
+                post("/login").
                 prettyPeek().
         then().statusCode(200);
     }
