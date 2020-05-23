@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import static io.restassured.RestAssured.given;
+import static io.restassured.RestAssured.when;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
@@ -82,6 +83,21 @@ public class JsonPathExample {
         String base = response.jsonPath().getString("base");
         assertThat(base, is("PHP"));
 
+    }
+
+    @Test
+    public void jsonPathListExamples(){
+        JsonPath jsonPath = when().get("http://api.cybertektraining.com/student/all").jsonPath();
+
+        // get the name of the first student
+        String s1FirstName = jsonPath.getString("students[0].firstName");
+        System.out.println("s1FirstName = " + s1FirstName);
+
+        String s2FirstName = jsonPath.getString("students[1].firstName");
+        System.out.println("s2FirstName = " + s2FirstName);
+
+        String lastStudent = jsonPath.getString("students[-1].firstName");
+        System.out.println("lastStudent = " + lastStudent);
     }
 
 }
