@@ -5,9 +5,11 @@ import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
 import java.util.Map;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
 public class JsonPathExample {
@@ -49,6 +51,7 @@ public class JsonPathExample {
     /*
     make query with base PHP
     verify that body contains base with value PHP, content type, status
+    use body method
      */
     @Test
     public void testPHP(){
@@ -60,5 +63,25 @@ public class JsonPathExample {
                 statusCode(200).
                 contentType(ContentType.JSON).
                 body("base", is("PHP"));
+    } // break 3.01
+
+    /*
+    make query with base PHP
+    verify that body contains base with value PHP, content type, status
+    use jsonpath
+     */
+    @Test
+    public void testPHPAgain(){
+        Response response = given().
+                queryParam("base", "PHP").
+                when().
+                get("https://api.exchangeratesapi.io/latest");
+        response.then().statusCode(200).
+                contentType(ContentType.JSON);
+
+        String base = response.jsonPath().getString("base");
+        assertThat(base, is("PHP"));
+
     }
+
 }
