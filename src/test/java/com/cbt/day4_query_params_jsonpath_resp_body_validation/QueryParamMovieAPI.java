@@ -15,10 +15,10 @@ public class QueryParamMovieAPI {
     public void test(){
         given().
                log().all().
-//               queryParam("apiKey", "e0484f01").
-//               queryParam("t", "Titanic").
+               queryParam("apiKey", "e0484f01").
+               queryParam("t", "Titanic").
         when().
-            get("https://omdbapi.com/?apiKey=e0484f01&t=Titanic").
+            get("https://omdbapi.com/").
             prettyPeek().
         then().statusCode(200);
     }
