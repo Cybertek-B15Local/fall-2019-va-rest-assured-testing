@@ -34,4 +34,28 @@ public class TokenBasedAuthentication {
             prettyPeek().
         then().statusCode(200);
     }
+
+
+    /*
+    get token as student
+    then add a new book
+    verify status code 403
+     */
+    @Test
+    public void getTokenAddBook(){
+        String token = given().
+                            formParam("email", "student27@library").
+                            formParam("password", "kkMksO2i").
+                    when().
+                            post("/login").
+                            jsonPath().getString("token");
+        System.out.println("token = " + token);
+
+        given().
+                header("x-library-token", token).
+        when().
+                post("/add_book").
+                prettyPeek().
+        then().statusCode(403);
+    }
 }
