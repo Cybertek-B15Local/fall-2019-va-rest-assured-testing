@@ -56,4 +56,5 @@ verify city Myrtle Beach
                 assertThat().body("city", is("Myrtle Beach"));
 
     }
+
 }

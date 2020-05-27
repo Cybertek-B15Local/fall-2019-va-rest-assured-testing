@@ -66,8 +66,9 @@ public class TokenBasedAuthentication {
 
         //https://api.github.com/repos/marufjont/secret-repository
 
+        // this token is temporary. after sometime this code may not work
         given().
-//                auth().oauth2("06d395e2eabddd0ab67e7573b65fe640c469226f").
+                auth().oauth2("06d395e2eabddd0ab67e7573b65fe640c469226f").
         when().
                 get("https://api.github.com/repos/marufjont/secret-repository").
                 prettyPeek().
