@@ -56,6 +56,23 @@ public class TokenBasedAuthentication {
         when().
                 post("/add_book").
                 prettyPeek().
-        then().statusCode(403);
+        then().
+                statusCode(403);
+    }
+
+
+    @Test
+    public void oauth2(){
+
+        //https://api.github.com/repos/marufjont/secret-repository
+
+        given().
+//                auth().oauth2("06d395e2eabddd0ab67e7573b65fe640c469226f").
+        when().
+                get("https://api.github.com/repos/marufjont/secret-repository").
+                prettyPeek().
+        then().
+                statusCode(200);
+
     }
 }
