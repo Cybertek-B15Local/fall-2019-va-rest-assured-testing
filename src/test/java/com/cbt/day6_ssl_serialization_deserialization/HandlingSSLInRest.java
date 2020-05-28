@@ -44,7 +44,7 @@ public class HandlingSSLInRest {
         then().statusCode(200);
     }
 
-
+// break 7.39
 
 
 
