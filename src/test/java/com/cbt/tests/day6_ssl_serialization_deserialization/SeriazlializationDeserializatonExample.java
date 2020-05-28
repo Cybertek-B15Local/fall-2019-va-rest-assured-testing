@@ -1,5 +1,6 @@
 package com.cbt.tests.day6_ssl_serialization_deserialization;
 
+import com.cbt.pojos.Car;
 import com.google.gson.Gson;
 import org.junit.jupiter.api.Test;
 
@@ -34,8 +35,14 @@ public class SeriazlializationDeserializatonExample {
     }
 
     @Test
-    public void readToObject(){
-
+    public void readToObject() throws FileNotFoundException {
+        // read the file
+        FileReader fileReader = new FileReader("src/test/resources/car.json");
+        // de serialize into pojo
+        Gson gson = new Gson();
+        Car myCar = gson.fromJson(fileReader, Car.class);
+        System.out.println(myCar.getMake());
+        System.out.println(myCar.getDoors());
     }
 
 }
