@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Map;
 
 public class SeriazlializationDeserializatonExample {
@@ -44,5 +46,24 @@ public class SeriazlializationDeserializatonExample {
         System.out.println(myCar.getMake());
         System.out.println(myCar.getDoors());
     }
+
+    @Test
+    public void writeToJsonFile() throws IOException {
+        // create object
+        Car myCar = new Car("Corolla", "2004 one", 4, 98);
+        System.out.println(myCar);
+
+        // write to file aka serialize it
+        Gson gson = new Gson();
+
+        FileWriter fileWriter =new FileWriter("src/test/resources/new_car.json");
+
+        gson.toJson(myCar, fileWriter);
+
+        fileWriter.flush();
+        fileWriter.close();
+    }
+
+
 
 }
