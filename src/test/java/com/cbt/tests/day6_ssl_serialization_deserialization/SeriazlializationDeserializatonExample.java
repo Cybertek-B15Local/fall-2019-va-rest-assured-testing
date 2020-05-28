@@ -1,8 +1,11 @@
 package com.cbt.tests.day6_ssl_serialization_deserialization;
 
 import com.cbt.pojos.Car;
+import com.cbt.pojos.Spartan;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import io.restassured.RestAssured;
+import io.restassured.response.Response;
 import org.junit.jupiter.api.Test;
 
 import java.io.FileNotFoundException;
@@ -10,6 +13,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Map;
+
+import static io.restassured.RestAssured.given;
 
 public class SeriazlializationDeserializatonExample {
 
@@ -77,7 +82,7 @@ public class SeriazlializationDeserializatonExample {
 
         System.out.println(car);
 
-        FileWriter writer = new FileWriter("src/test/resources/new_car.json");
+        FileWriter writer = new FileWriter("src/test/resources/another_new_car.json");
         gson = new GsonBuilder().setPrettyPrinting().create();
         gson.toJson(car, writer);
 
@@ -85,5 +90,26 @@ public class SeriazlializationDeserializatonExample {
         writer.close();
         reader.close();
     }
+
+    @Test
+    public void readAsSpartanObject(){
+        RestAssured.baseURI= "http://54.146.89.247:8000/api";
+        Response response = given().
+                auth().basic("admin", "admin").
+                pathParam("id", 138).
+           when().
+                get("/spartans/{id}");
+
+        response.prettyPeek();
+        // as() --> de serialize response body into Car type (custom type)
+        Spartan spartan = response.as(Spartan.class);
+        System.out.println(spartan);
+
+        // as() --> de serialize response body into map type (not custom type)
+        Map<String, ?> spartanMap = response.as(Map.class);
+        System.out.println(spartanMap);
+
+    }
+
 
 }
