@@ -1,4 +1,4 @@
-package com.cbt.day1_intro;
+package com.cbt.tests.day1_intro;
 
 import org.junit.jupiter.api.Test;
 

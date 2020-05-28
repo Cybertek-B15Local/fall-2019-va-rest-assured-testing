@@ -1,4 +1,4 @@
-package com.cbt.day5_authentication_authorization;
+package com.cbt.tests.day5_authentication_authorization;
 
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.Test;

@@ -1,11 +1,10 @@
-package com.cbt.day3_path_query_params;
+package com.cbt.tests.day3_path_query_params;
 
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
-import static io.restassured.RestAssured.when;
 
 public class PathParametersExamples {
 

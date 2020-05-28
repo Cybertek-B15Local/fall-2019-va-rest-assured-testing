@@ -1,4 +1,4 @@
-package com.cbt.office_hours;
+package com.cbt.tests.office_hours;
 
 import io.restassured.RestAssured;
 import io.restassured.response.Response;

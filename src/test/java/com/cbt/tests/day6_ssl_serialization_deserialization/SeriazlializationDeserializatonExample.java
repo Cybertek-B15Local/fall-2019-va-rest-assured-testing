@@ -1,4 +1,4 @@
-package com.cbt.day6_ssl_serialization_deserialization;
+package com.cbt.tests.day6_ssl_serialization_deserialization;
 
 import com.google.gson.Gson;
 import org.junit.jupiter.api.Test;
@@ -20,16 +20,22 @@ public class SeriazlializationDeserializatonExample {
        // we do the conversion using Gson or Jackson-databind
         // in out framework we use Gson
         // json --> file type (like xml, pdf, doc)
-        // gson --> library used for conversion(serizliation)
+        // gson --> library used for conversion(serizliation and deserizliation)
         // Jason --> name  but that is not importatn right now
         Gson gson = new Gson();
 
         // we converted the file into a map
         // we deserialized file to java object
-        Map<String, Object> myCar = gson.fromJson(fileReader, Map.class);
+        Map<String, ?> myCar = gson.fromJson(fileReader, Map.class);
         System.out.println(myCar);
         System.out.println(myCar.get("doors"));
         System.out.println(myCar.get("make"));
 
     }
+
+    @Test
+    public void readToObject(){
+
+    }
+
 }

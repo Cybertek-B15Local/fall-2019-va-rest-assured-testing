@@ -1,6 +1,5 @@
-package com.cbt.day4_query_params_jsonpath_resp_body_validation;
+package com.cbt.tests.day4_query_params_jsonpath_resp_body_validation;
 
-import io.restassured.RestAssured;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;

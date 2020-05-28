@@ -1,4 +1,4 @@
-package com.cbt.day3_path_query_params;
+package com.cbt.tests.day3_path_query_params;
 
 import io.restassured.RestAssured;
 import io.restassured.response.Response;

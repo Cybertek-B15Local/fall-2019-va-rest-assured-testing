@@ -1,9 +1,8 @@
-package com.cbt.day1_intro;
+package com.cbt.tests.day1_intro;
 
 
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.Matchers.equalTo;

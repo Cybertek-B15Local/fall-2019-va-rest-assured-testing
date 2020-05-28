@@ -1,4 +1,4 @@
-package com.cbt.day2_endpoints_response;
+package com.cbt.tests.day2_endpoints_response;
 
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
@@ -6,7 +6,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
-import static io.restassured.RestAssured.when;
 
 public class CustomHeadersTests {
 /*
