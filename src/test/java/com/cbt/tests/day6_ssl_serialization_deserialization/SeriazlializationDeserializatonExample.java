@@ -2,6 +2,7 @@ package com.cbt.tests.day6_ssl_serialization_deserialization;
 
 import com.cbt.pojos.Car;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import org.junit.jupiter.api.Test;
 
 import java.io.FileNotFoundException;
@@ -54,7 +55,8 @@ public class SeriazlializationDeserializatonExample {
         System.out.println(myCar);
 
         // write to file aka serialize it
-        Gson gson = new Gson();
+//        Gson gson = new Gson();
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
         FileWriter fileWriter =new FileWriter("src/test/resources/new_car.json");
 
@@ -64,6 +66,24 @@ public class SeriazlializationDeserializatonExample {
         fileWriter.close();
     }
 
+    @Test
+    public void readAndWriteItback() throws IOException {
+        FileReader reader = new FileReader("src/test/resources/car.json");
+        Gson gson = new Gson();
+        Car car = gson.fromJson(reader, Car.class);
+        System.out.println(car);
 
+        car.setPrice(80);
+
+        System.out.println(car);
+
+        FileWriter writer = new FileWriter("src/test/resources/new_car.json");
+        gson = new GsonBuilder().setPrettyPrinting().create();
+        gson.toJson(car, writer);
+
+        writer.flush();
+        writer.close();
+        reader.close();
+    }
 
 }
