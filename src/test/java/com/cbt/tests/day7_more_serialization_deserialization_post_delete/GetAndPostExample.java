@@ -114,6 +114,27 @@ public class GetAndPostExample {
         spartan.setId(id);
         assertThat(newBornSpartan, samePropertyValuesAs(spartan));
 
+        // delete that spartan using id
+        given().
+                auth().basic("admin", "admin").
+                pathParam("id", id).
+        when().
+                delete("api/spartans/{id}").
+                prettyPeek().
+        then().
+                statusCode(204);
+
+       // verify that thing is deleted
+       given().
+            auth().basic("admin", "admin").
+            pathParam("id", id).
+       when().
+                get("api/spartans/{id}").prettyPeek().
+       then().
+               statusCode(404).
+       and().
+                body("message", is("Spartan Not Found"));
+
     }
 
 }
