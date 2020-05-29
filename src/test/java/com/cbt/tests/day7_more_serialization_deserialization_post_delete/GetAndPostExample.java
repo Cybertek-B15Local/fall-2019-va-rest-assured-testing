@@ -10,7 +10,9 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.samePropertyValuesAs;
 
 public class GetAndPostExample {
 
@@ -95,10 +97,22 @@ public class GetAndPostExample {
                                     body(spartan).
                                 when().
                                     post("/api/spartans").prettyPeek();
-        postResponse.then().statusCode(201).and().body("message", is("A Spartan is Born!"));
+        postResponse.then().statusCode(201).and().body("success", is("A Spartan is Born!"));
 
         int id = postResponse.path("data.id");
         System.out.println("id = " + id);
+
+        // get the spartan information using the id
+       Response getResponse= given().
+                auth().basic("admin", "admin").
+                pathParam("id", id).
+        when().
+                get("api/spartans/{id}").prettyPeek();
+        getResponse.then().statusCode(200);
+
+        Spartan newBornSpartan = getResponse.as(Spartan.class);
+        spartan.setId(id);
+        assertThat(newBornSpartan, samePropertyValuesAs(spartan));
 
     }
 
