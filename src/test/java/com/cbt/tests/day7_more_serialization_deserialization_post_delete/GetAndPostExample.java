@@ -10,6 +10,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.is;
 
 public class GetAndPostExample {
 
@@ -60,7 +61,44 @@ public class GetAndPostExample {
         then().
                 statusCode(201);
 
-        // break 7.44
+    }
+
+    // end to end testing
+    // create a new spartan
+    // get the id of the new spartan
+    // use the get single spartan endpoint to get that new spartan info using it
+    // verify 200
+    // delete that spartan using the id
+    // use the get single spartan endpoint to get that new spartan info using it
+    // 404
+
+    @Test
+    public void endToEndTesting(){
+        // create pojo
+        Faker faker = new Faker();
+        String name = faker.name().firstName();
+        String gender;
+        if (faker.bool().bool()) {
+            gender = "Female";
+        } else {
+            gender="Male";
+        }
+        String phone = faker.number().digits(10);
+        Spartan spartan = new Spartan(name, gender, phone);
+
+        // create new spartan, verify 201, save id
+        Response postResponse =
+                                given().
+                                    log().all().
+                                    auth().basic("admin", "admin").
+                                    contentType(ContentType.JSON).
+                                    body(spartan).
+                                when().
+                                    post("/api/spartans").prettyPeek();
+        postResponse.then().statusCode(201).and().body("message", is("A Spartan is Born!"));
+
+        int id = postResponse.path("data.id");
+        System.out.println("id = " + id);
 
     }
 
