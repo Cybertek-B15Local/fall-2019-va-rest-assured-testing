@@ -4,6 +4,8 @@ import com.cbt.pojos.Car;
 import com.cbt.pojos.Donut;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import io.restassured.RestAssured;
+import io.restassured.mapper.ObjectMapper;
 import org.junit.jupiter.api.Test;
 
 import java.io.FileNotFoundException;
@@ -26,7 +28,8 @@ public class WriteReadExamples {
         System.out.println("donut = " + donut);
 
         // write to file aka serialize it
-        Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+        Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().
+                                        setPrettyPrinting().create();
 //
         FileWriter fileWriter =new FileWriter("src/test/resources/new_donut.json");
 
@@ -34,7 +37,6 @@ public class WriteReadExamples {
 
         fileWriter.flush();
         fileWriter.close();
-        // BREAK 11.09
     }
 
 
@@ -48,6 +50,32 @@ public class WriteReadExamples {
 
         Donut donut = gson.fromJson(fileReader, Donut.class);
         System.out.println(donut);
+
+
     }
+
+    /*
+    CUSTOM MAPPER EXAMPLE FOR REST ASSURED
+    this is how you can coonfigure your rest assured to use Gson with
+    excludeFieldsWithoutExposeAnnotation
+
+
+
+     ObjectMapperConfig config = new ObjectMapperConfig(ObjectMapperType.GSON)
+                .gsonObjectMapperFactory(
+                        (type, s) -> new GsonBuilder()
+                                .excludeFieldsWithoutExposeAnnotation()
+                                .create());
+
+        RestAssured.config = RestAssuredConfig.config().objectMapperConfig(config);
+
+        Response response = get("/student/{id}", 11613);
+
+        // assume we have student pojo with @expose annotation
+        Student student = response.jsonPath().getObject("students[0]", Student.class);
+        System.out.println(student);
+
+
+     */
 
 }
