@@ -29,4 +29,12 @@ public class Link {
     public String getRel() {
         return rel;
     }
+
+    @Override
+    public String toString() {
+        return "Link{" +
+                "rel='" + rel + '\'' +
+                ", href='" + href + '\'' +
+                '}';
+    }
 }

@@ -177,4 +177,21 @@ public class Employee {
         this.links = links;
     }
 
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "employeeId=" + employeeId +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", hireDate='" + hireDate + '\'' +
+                ", jobId='" + jobId + '\'' +
+                ", salary=" + salary +
+                ", commissionPct=" + commissionPct +
+                ", managerId=" + managerId +
+                ", departmentId=" + departmentId +
+                ", links=" + links +
+                '}';
+    }
 }
