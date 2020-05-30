@@ -18,7 +18,7 @@ public class WriteReadExamples {
         System.out.println("donut = " + donut);
 
         // write to file aka serialize it
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
 //
         FileWriter fileWriter =new FileWriter("src/test/resources/new_donut.json");
 
@@ -26,5 +26,6 @@ public class WriteReadExamples {
 
         fileWriter.flush();
         fileWriter.close();
+        // BREAK 11.09
     }
 }

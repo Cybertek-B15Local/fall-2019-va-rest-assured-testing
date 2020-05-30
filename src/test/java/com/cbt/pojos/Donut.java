@@ -1,5 +1,8 @@
 package com.cbt.pojos;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 public class Donut {
     /*
     {
@@ -9,9 +12,18 @@ public class Donut {
        "isGlutenFree": yes
     }
      */
+    @SerializedName("donutId")
+    @Expose(serialize = false)
     private int id;
+
+    @Expose
     private String name;
+
+    @SerializedName("sugarPercentage")
+    @Expose
     private int sugarPct;
+
+    @Expose
     private boolean isGlutenFree;
 
     public Donut(String name, int sugarPct, boolean isGlutenFree) {
