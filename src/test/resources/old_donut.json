@@ -1,6 +1,1 @@
-{
-  "donutId": 101,
-  "name": "cake donut",
-  "sugarPercentage": 12,
-  "isGlutenFree": true
-}
+{"name":"cake donut","sugarPercentage":12,"isGlutenFree":true}
