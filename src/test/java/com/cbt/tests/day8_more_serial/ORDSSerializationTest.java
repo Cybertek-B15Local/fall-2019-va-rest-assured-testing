@@ -52,3 +52,41 @@ public class ORDSSerializationTest {
         System.out.println("firstEmlpoyee = " + firstEmlpoyee.getFirstName());
     }
 }
+
+
+//Student
+//    String admissionNo
+//    int batch
+//    String birthDate
+//    Company company
+//    Contact contact
+//    String firstName
+//    String gender
+//    String joinDate
+//    String lastName
+//    String major
+//    String password
+//    String section
+//    int studentId
+//    String subject
+//
+//
+//Company
+//     Address address
+//     int companyId
+//    String companyName
+//    String startDate
+//    String title
+//
+//Contact
+//    int contactId
+//    String emailAddress
+//    String phone
+//    String premanentAddress
+//
+//Address
+//        int addressId;
+//        String street;
+//        String city;
+//        String state;
+//        int zipcode;
