@@ -12,6 +12,20 @@ public class Donut {
        "isGlutenFree": yes
     }
      */
+
+    /*
+     @SerializedName("donutId") --> use this tag if you want to use differnet name in pojo
+     and different name in json
+
+      @Expose--> use this if to control whether we want read/write selected values from/to json
+
+       @Expose(serialize = false) --> this value will not be written to json
+
+       @Expose(deserialize = false) --> this value will not be read from json
+
+when using @expose tag, create gson object like this:
+     Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+     */
     @SerializedName("donutId")
     @Expose(serialize = false)
     private int id;

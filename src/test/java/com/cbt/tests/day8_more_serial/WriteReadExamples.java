@@ -6,6 +6,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.junit.jupiter.api.Test;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -37,8 +39,15 @@ public class WriteReadExamples {
 
 
     @Test
-    public void readFromJsonFile(){
+    public void readFromJsonFile() throws FileNotFoundException {
+        // read from file
+        FileReader fileReader = new FileReader("src/test/resources/old_donut.json");
 
+        // convert to object using gson
+        Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+
+        Donut donut = gson.fromJson(fileReader, Donut.class);
+        System.out.println(donut);
     }
 
 }
