@@ -10,6 +10,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class WriteReadExamples {
+    /*
+    Gson --> library to serialize and deserialize
+    GsonBuilder --> class that helps create Gson object with different options
+
+    FileWriter  --> write to the physical file
+     */
     @Test
     public void writeToJsonFile() throws IOException {
         // create object
@@ -28,4 +34,11 @@ public class WriteReadExamples {
         fileWriter.close();
         // BREAK 11.09
     }
+
+
+    @Test
+    public void readFromJsonFile(){
+
+    }
+
 }
