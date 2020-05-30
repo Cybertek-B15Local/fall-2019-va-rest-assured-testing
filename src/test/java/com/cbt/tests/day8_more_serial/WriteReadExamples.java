@@ -1,0 +1,30 @@
+package com.cbt.tests.day8_more_serial;
+
+import com.cbt.pojos.Car;
+import com.cbt.pojos.Donut;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import org.junit.jupiter.api.Test;
+
+import java.io.FileWriter;
+import java.io.IOException;
+
+public class WriteReadExamples {
+    @Test
+    public void writeToJsonFile() throws IOException {
+        // create object
+        Donut donut = new Donut("cake donut", 12, true);
+
+        System.out.println("donut = " + donut);
+
+        // write to file aka serialize it
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+//
+        FileWriter fileWriter =new FileWriter("src/test/resources/new_donut.json");
+
+        gson.toJson(donut, fileWriter);
+
+        fileWriter.flush();
+        fileWriter.close();
+    }
+}
