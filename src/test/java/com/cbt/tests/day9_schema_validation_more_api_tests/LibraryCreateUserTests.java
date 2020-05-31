@@ -6,6 +6,7 @@ import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
@@ -18,7 +19,7 @@ public class LibraryCreateUserTests {
     3. Librarian should be able create librarian users
     4. Librarian should be able create student users
     5. Librarian should not be able create users with wrong group id
-    6. Librarian should not be able create users with status
+    6. Librarian should not be able create users with wrong status
     7. Librarian should not be able create users with missing fields
      */
 
@@ -32,7 +33,8 @@ public class LibraryCreateUserTests {
     }
 
     @Test
-    public void test(){
+    @DisplayName("Librarians cannot create admins")
+    public void librariansCannotCreateAdmins(){
         request.
                 formParam("user_group_id", 1).
         when().
@@ -44,6 +46,24 @@ public class LibraryCreateUserTests {
 
     }
 
+    @Test
+    @DisplayName("Librarian should not be able create users with wrong group id")
+    public void wrongGroupId(){
+        request.
+                formParam("full_name", "john doe").
+                formParam("email", "jon.doe@somemail.com").
+                formParam("password", "admin").
+                formParam("user_group_id", 44).
+                formParam("status", "active").
+                formParam("start_date", "2020-05-05").
+                formParam("end_date", "2021-05-05").
+                formParam("address", "123 main st").
+        when().
+                post("add_user").prettyPeek().
+        then().
+                statusCode(400).
+                contentType(ContentType.JSON);
+    }
 
 
 }
