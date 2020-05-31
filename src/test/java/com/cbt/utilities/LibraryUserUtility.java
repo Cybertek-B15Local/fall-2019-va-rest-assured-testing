@@ -13,7 +13,7 @@ public class LibraryUserUtility {
      * @return
      *          user map
      */
-    public static Map<String, ?> createUser(int userGroup){
+    public static Map<String, Object> createUser(int userGroup){
         Faker faker = new Faker();
         String fullName = faker.name().fullName();
         String usernameEmail = faker.name().username();

@@ -109,7 +109,7 @@ public class LibraryCreateUserTests {
     @DisplayName("Create, get, update and get again")
     public void endToEnd(){
         // POST NEW USER
-        Map<String, ?> user = LibraryUserUtility.createUser(3);
+        Map<String, Object> user = LibraryUserUtility.createUser(3);
         Response postResponse =
                 request.
                     formParams(user).
