@@ -2,6 +2,7 @@ package com.cbt.tests.day9_schema_validation_more_api_tests;
 
 import com.cbt.utilities.AuthenticationUtility;
 import com.cbt.utilities.ConfigurationReader;
+import com.cbt.utilities.LibraryUserUtility;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
@@ -9,9 +10,10 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.Map;
+
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.not;
+import static org.hamcrest.Matchers.*;
 
 public class LibraryCreateUserTests {
     /*
@@ -85,4 +87,19 @@ public class LibraryCreateUserTests {
                 contentType(ContentType.JSON);
     }
 
+
+    @Test
+    @DisplayName("Create student user test")
+    public void createStudentTest(){
+        Map<String, ?> user = LibraryUserUtility.createUser(3);
+        request.
+                formParams(user).
+        when().
+                post("add_user").prettyPeek().
+        then().
+                statusCode(200).
+                contentType(ContentType.JSON).
+                body("message", is("The user has been created.")).
+                body("user_id", not(emptyOrNullString()));
+    }
 }
