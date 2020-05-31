@@ -5,6 +5,7 @@ import com.cbt.utilities.ConfigurationReader;
 import com.github.javafaker.Faker;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
+import io.restassured.matcher.RestAssuredMatchers;
 import io.restassured.module.jsv.JsonSchemaValidator;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -78,6 +79,27 @@ public class SchemaValidationTests {
 
     @Test
     public  void validateXMLResponse(){
+       given().
+               accept(ContentType.XML).
+       when().
+               get("api/spartans").
+               prettyPeek().
+       then().
+               statusCode(200).
+                body(RestAssuredMatchers.matchesXsdInClasspath("all-spartans.xsd"));
+    }
+
+    @Test
+    public void validateXMLResponseNotInClassPath(){
+        File file = new File("src/test/resources/all-spartans.xsd");
+        given().
+                header("Accept", "application/xml").
+        when().
+                get("api/spartans").
+                prettyPeek().
+        then().
+                statusCode(200).
+                body(RestAssuredMatchers.matchesXsd(file));
 
     }
 
