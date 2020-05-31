@@ -1,0 +1,100 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "http://example.com/example.json",
+  "type": "object",
+  "title": "The root schema",
+  "description": "The root schema comprises the entire JSON document.",
+  "default": {},
+  "examples": [
+    {
+      "success": "A Spartan is Born!",
+      "data": {
+        "id": 103,
+        "name": "Not Fernando",
+        "gender": "Male",
+        "phone": 1234512345
+      }
+    }
+  ],
+  "required": [
+    "success",
+    "data"
+  ],
+  "additionalProperties": true,
+  "properties": {
+    "success": {
+      "$id": "#/properties/success",
+      "type": "string",
+      "title": "The success schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": "",
+      "examples": [
+        "A Spartan is Born!"
+      ]
+    },
+    "data": {
+      "$id": "#/properties/data",
+      "type": "object",
+      "title": "The data schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": {},
+      "examples": [
+        {
+          "id": 103,
+          "name": "Not Fernando",
+          "gender": "Male",
+          "phone": 1234512345
+        }
+      ],
+      "required": [
+        "id",
+        "name",
+        "gender",
+        "phone"
+      ],
+      "additionalProperties": true,
+      "properties": {
+        "id": {
+          "$id": "#/properties/data/properties/id",
+          "type": "integer",
+          "title": "The id schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": 0,
+          "examples": [
+            103
+          ]
+        },
+        "name": {
+          "$id": "#/properties/data/properties/name",
+          "type": "string",
+          "title": "The name schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": "",
+          "examples": [
+            "Not Fernando"
+          ]
+        },
+        "gender": {
+          "$id": "#/properties/data/properties/gender",
+          "type": "string",
+          "title": "The gender schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": "",
+          "examples": [
+            "Male"
+          ]
+        },
+        "phone": {
+          "$id": "#/properties/data/properties/phone",
+          "type": "integer",
+          "title": "The phone schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": 0,
+          "examples": [
+            1234512345
+          ]
+        }
+      }
+    }
+  }
+}
