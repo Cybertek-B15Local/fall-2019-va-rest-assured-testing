@@ -3,6 +3,7 @@ package com.cbt.tests.day9_schema_validation_more_api_tests;
 import com.cbt.utilities.AuthenticationUtility;
 import com.cbt.utilities.ConfigurationReader;
 import com.cbt.utilities.LibraryUserUtility;
+import com.github.javafaker.Faker;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -117,8 +118,7 @@ public class LibraryCreateUserTests {
         postResponse.then().statusCode(200);
         String id = postResponse.path("user_id");
         System.out.println("id = " + id);
-        // GET USER
-
+        // GET USER  TODO not working due to id issue
         request.
                 pathParam("id", id).
         when().
@@ -130,7 +130,16 @@ public class LibraryCreateUserTests {
                 body("id", equalTo(id)).
                 body("full_name", equalTo(user.get("full_name"))).
                 body("email", equalTo(user.get("email"))).
-                body("password", equalTo(user.get("password"))).
-                body("user_group_id", equalTo(3));
+                body("password", not(emptyOrNullString())).
+                body("user_group_id", equalTo("3"));
+
+        // UPDATE USER INFORMATION
+       given().
+               header("x-library-token", "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjp7ImlkIjoiMzQwIiwiZnVsbF9uYW1lIjoiVGVzdCBMaWJyYXJpYW4gMjIiLCJlbWFpbCI6ImxpYnJhcmlhbjIyQGxpYnJhcnkiLCJ1c2VyX2dyb3VwX2lkIjoiMiJ9LCJpYXQiOjE1OTA5NTgwNTksImV4cCI6MTU5MzU1MDA1OX0.suxNisSgCsTXFxJD5RZ3qgiCWXEJqvo-RS-UKgvCSYM").
+                formParams(user).
+        when().
+                patch("update_user").prettyPeek().
+        then().
+                statusCode(200);
     }
 }
