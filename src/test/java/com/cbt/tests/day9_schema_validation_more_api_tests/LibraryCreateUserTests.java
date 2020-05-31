@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.not;
 
 public class LibraryCreateUserTests {
     /*
@@ -29,7 +30,7 @@ public class LibraryCreateUserTests {
     public static void setup(){
         RestAssured.baseURI = ConfigurationReader.getProperty("library1_base_url");
         String token = AuthenticationUtility.getLibrarianToken();
-        request = given().header("x-library-token", token);
+        request = given().header("x-library-token", token).log().all();
     }
 
     @Test
@@ -61,9 +62,27 @@ public class LibraryCreateUserTests {
         when().
                 post("add_user").prettyPeek().
         then().
-                statusCode(400).
+                statusCode(500).
                 contentType(ContentType.JSON);
     }
 
+    @Test
+    @DisplayName("Librarian should not be able create users with wrong status")
+    public void wrongStatus(){
+        request.
+                formParam("full_name", "john doe").
+                formParam("email", "jon.doe@somemail.com").
+                formParam("password", "admin").
+                formParam("user_group_id", "3").
+                formParam("status", "super-active").
+                formParam("start_date", "2020-05-05").
+                formParam("end_date", "2021-05-05").
+                formParam("address", "123 main st").
+        when().
+                post("add_user").prettyPeek().
+        then().
+                statusCode(not(200)).
+                contentType(ContentType.JSON);
+    }
 
 }
