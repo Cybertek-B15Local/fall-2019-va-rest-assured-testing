@@ -5,6 +5,7 @@ import com.cbt.utilities.ConfigurationReader;
 import com.cbt.utilities.LibraryUserUtility;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
+import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
@@ -101,5 +102,35 @@ public class LibraryCreateUserTests {
                 contentType(ContentType.JSON).
                 body("message", is("The user has been created.")).
                 body("user_id", not(emptyOrNullString()));
+    }
+
+    @Test
+    @DisplayName("Create, get, update and get again")
+    public void endToEnd(){
+        // POST NEW USER
+        Map<String, ?> user = LibraryUserUtility.createUser(3);
+        Response postResponse =
+                request.
+                    formParams(user).
+                when().
+                    post("add_user").prettyPeek();
+        postResponse.then().statusCode(200);
+        String id = postResponse.path("user_id");
+        System.out.println("id = " + id);
+        // GET USER
+
+        request.
+                pathParam("id", id).
+        when().
+                get("get_user_by_id/{id}").
+                prettyPeek().
+        then().
+                statusCode(200).
+                contentType(ContentType.JSON).
+                body("id", equalTo(id)).
+                body("full_name", equalTo(user.get("full_name"))).
+                body("email", equalTo(user.get("email"))).
+                body("password", equalTo(user.get("password"))).
+                body("user_group_id", equalTo(3));
     }
 }

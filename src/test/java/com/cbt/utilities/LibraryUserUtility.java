@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class LibraryUserUtility {
     /**
-     * take user type create map that contains student or librarin user form data
+     * take user type create map that contains student or librarian user form data
      * @param userGroup
      *
      * @return
