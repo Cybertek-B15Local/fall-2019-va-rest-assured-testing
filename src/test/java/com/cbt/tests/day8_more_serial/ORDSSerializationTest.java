@@ -26,13 +26,13 @@ public class ORDSSerializationTest {
     public static void setup(){
         RestAssured.baseURI= ConfigurationReader.getProperty("ords_base_url");
 
-        // pre configure the rest assured to use the custom Gson object mapper
-        ObjectMapperConfig config = new ObjectMapperConfig(ObjectMapperType.GSON)
-                .gsonObjectMapperFactory(
-                        (type, s) -> new GsonBuilder()
-                                .setPrettyPrinting()
-                                .create());
-        RestAssured.config = RestAssuredConfig.config().objectMapperConfig(config);
+//        // pre configure the rest assured to use the custom Gson object mapper
+//        ObjectMapperConfig config = new ObjectMapperConfig(ObjectMapperType.GSON)
+//                .gsonObjectMapperFactory(
+//                        (type, s) -> new GsonBuilder()
+//                                .setPrettyPrinting()
+//                                .create());
+//        RestAssured.config = RestAssuredConfig.config().objectMapperConfig(config);
 
     }
 
