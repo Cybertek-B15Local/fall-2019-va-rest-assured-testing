@@ -5,6 +5,8 @@ import io.restassured.response.Response;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.not;
 
 public class CookieTests {
 
@@ -14,6 +16,7 @@ public class CookieTests {
      */
     @Test
     public void getCookieTest(){
+        // GET THE COOKIE
         Response postResponse =
                 given().
                     formParam("user_login", "username").
@@ -25,6 +28,17 @@ public class CookieTests {
         // getDetailedCookie  --> returns the cookie with given name
         Cookie cookie = postResponse.getDetailedCookie("JSESSIONID");
         System.out.println("cookie = " + cookie);
+
+        // LOGIN USING THE COOKIE
+        // send the request with cookie attached
+        given().
+                cookie(cookie).
+        when().
+                get("http://zero.webappsecurity.com/bank/online-statements.html").
+                prettyPeek().
+        then().
+                statusCode(200).
+                body(not(containsString("login")));
     }
 
 }
