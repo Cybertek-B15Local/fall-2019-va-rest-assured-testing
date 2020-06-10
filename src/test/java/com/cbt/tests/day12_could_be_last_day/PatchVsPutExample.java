@@ -9,6 +9,9 @@ import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Test;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.is;
 
@@ -119,9 +122,30 @@ public class PatchVsPutExample {
                 statusCode(200);
 
         // UPDATE USING PATCH
+        Map<String, String> bookInfo = new HashMap<>();
+        bookInfo.put("id", id);
+        bookInfo.put("name", new Faker().name().fullName());
+        System.out.println("bookInfo = " + bookInfo);
+
+        given().
+                header("x-library-token", token).
+                contentType(ContentType.JSON).
+                body(bookInfo).
+                log().all().
+        when().
+                patch("update_book").
+                prettyPeek().
+        then().
+                statusCode(200);
         // GET AGAIN
-
-
+        given().
+                header("x-library-token", token).
+                pathParam("id", id).
+        when().
+                get("get_book_by_id/{id}").
+                prettyPeek().
+        then().
+                statusCode(200);
 
     }
 }
