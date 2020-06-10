@@ -1,6 +1,7 @@
 package com.cbt.tests.day12_could_be_last_day;
 
 import com.cbt.pojos.Spartan;
+import com.cbt.utilities.AuthenticationUtility;
 import com.cbt.utilities.ConfigurationReader;
 import com.github.javafaker.Faker;
 import io.restassured.RestAssured;
@@ -89,7 +90,7 @@ public class PatchVsPutExample {
                 put("/api/spartans/{id}").prettyPeek().
             then().
                 statusCode(204);
-        // GET THE NEW SPARTAN INFORMATION
+        // GET THE SPARTAN'S NEW INFORMATION
 
         getResponse = given().
                 auth().basic("admin", "admin").
@@ -97,6 +98,30 @@ public class PatchVsPutExample {
                 when().
                 get("api/spartans/{id}").prettyPeek();
         getResponse.then().statusCode(200);
+
+    }
+
+
+    @Test
+    public void patch(){
+        // GET BOOK INFO
+        RestAssured.baseURI = ConfigurationReader.getProperty("library1_base_url");
+
+        String token = AuthenticationUtility.getLibrarianToken();
+        String id = "200";
+        given().
+            header("x-library-token", token).
+            pathParam("id", id).
+        when().
+                get("get_book_by_id/{id}").
+                prettyPeek().
+        then().
+                statusCode(200);
+
+        // UPDATE USING PATCH
+        // GET AGAIN
+
+
 
     }
 }
