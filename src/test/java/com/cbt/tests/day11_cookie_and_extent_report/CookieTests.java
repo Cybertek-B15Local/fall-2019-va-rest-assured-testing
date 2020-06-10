@@ -1,13 +1,16 @@
 package com.cbt.tests.day11_cookie_and_extent_report;
 
+import com.cbt.utilities.ExtentConfig;
 import io.restassured.http.Cookie;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.not;
 
+@ExtendWith(ExtentConfig.class)
 public class CookieTests {
 
     /*
