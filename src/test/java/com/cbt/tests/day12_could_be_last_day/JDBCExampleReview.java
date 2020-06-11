@@ -26,5 +26,16 @@ public class JDBCExampleReview {
             String name = resultSet.getString("region_name");
             System.out.println(name);
         }
+
+        // execute another query
+        sqlQuery = "SELECT * FROM countries";
+        resultSet = statement.executeQuery(sqlQuery);
+
+        // go through the results and print country names
+        while (resultSet.next()) {
+            String name = resultSet.getString(2);
+            System.out.println(name);
+        }
+
     }
 }
